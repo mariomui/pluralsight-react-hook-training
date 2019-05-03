@@ -1,6 +1,6 @@
-import React from "react";
-import "bootstrap/dist/css/bootstrap.min.css";
-import EmailValidatingForm from "../src/EmailValidatingForm";
+import React from 'react';
+
+import EmailValidatingForm from '../src/EmailValidatingForm';
 
 function emailvalidating() {
   return <EmailValidatingForm />;
