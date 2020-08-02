@@ -1,10 +1,10 @@
-import React, {
-  useState,
-  useEffect,
-  useContext,
-  useReducer,
+import {
   useCallback,
+  useContext,
+  useEffect,
   useMemo,
+  useReducer,
+  useState,
 } from 'react';
 
 import { Header } from '../src/Header';
