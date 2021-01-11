@@ -62,10 +62,18 @@ const SInputCol = styled.div`
   flex: 0 0 25%;
   height: 90%;
 `;
-
+const STextHistoryBox = styled.div`
+  display: flex;
+  flex-flow: column;
+  /* align-items: space-between; */
+  justify-content: center; // columns uses this to vertically center;
+  outline: 1px solid white;
+  flex: 0 0 25%;
+`;
 const Index = () => {
   // i have to debounce the handler.
   const [inputText, setInputText] = useState('');
+  const [textHistory, setTextHistory] = useState([]);
   /*
   everytime a prop renders the function gets activated.
   The callback is a simple ignore flag.
@@ -81,13 +89,21 @@ const Index = () => {
   //   []
   // );
 
-  const debouncedSearch = debounce((value) => {
-    console.log(value, 'saving');
-  }, 1000);
-  const handleOnInputChange = useCallback((e) => {
+  const debouncedSearch = useCallback(
+    debounce((value) => {
+      console.log(value, 'saving');
+      console.log(textHistory.concat(value), 'concatted value');
+      setTextHistory(textHistory.concat(value));
+    }, 100),
+    []
+  );
+  const handleOnInputChange = (e) => {
     setInputText(e.target.value);
-    debouncedSearch(e.target.value);
-  }, []);
+    // debouncedSearch(e.target.value);
+    // if the debounce search changes the inputText and resets all the state.
+    // try putting in debounced search again, the render of that state will clear stuff out.
+    setTextHistory([...textHistory, e.target.value]);
+  };
 
   return (
     <GeneralLayout>
@@ -113,7 +129,13 @@ const Index = () => {
           </STopContainer>
         </STopBanner>
         <SListedText>
-          <SBottomContainer></SBottomContainer>
+          <SBottomContainer>
+            <STextHistoryBox>
+              {textHistory.map((text, i) => {
+                return <div key={i}>{text}</div>;
+              })}
+            </STextHistoryBox>
+          </SBottomContainer>
         </SListedText>
       </SContent>
     </GeneralLayout>
