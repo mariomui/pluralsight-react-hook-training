@@ -5,6 +5,16 @@ import { css } from '@emotion/react';
 // import speaker1 from '@images/speakers/Speaker-187.jpg';
 
 export default function ScrollPic() {
+  const [windowTitle, setWindowTitle] = useState(0);
+
+  const handleMouseOver = useCallback((sid) => {
+    setWindowTitle(sid);
+  }, []);
+
+  useEffect(() => {
+    window.document.title = windowTitle + '';
+    console.log(windowTitle, 'setting useeffect in windowtitle');
+  }, [windowTitle]);
   return (
     <section
       css={css`
@@ -22,12 +32,19 @@ export default function ScrollPic() {
         const primaryImg = `static/speakers/Speaker-${sid}.jpg`;
         const secondaryImg = `static/speakers/bw/Speaker-${sid}.jpg`;
         return (
-          <ImgSource
+          <div
             key={sid}
-            src={secondaryImg}
-            primaryImg={primaryImg}
-            secondaryImg={secondaryImg}
-          />
+            onMouseOver={(e) => {
+              console.log(sid, 'onmouse overed');
+              handleMouseOver(sid);
+            }}
+          >
+            <ImgSource
+              src={secondaryImg}
+              primaryImg={primaryImg}
+              secondaryImg={secondaryImg}
+            />
+          </div>
         );
       })}
     </section>
