@@ -1,7 +1,7 @@
 // import Image from 'next/image';
 
 import styled from '@emotion/styled';
-import React, { useEffect, useRef } from 'react';
+import React, { useCallback, useEffect, useRef } from 'react';
 
 const SImgSquare = styled.div`
   position: relative;
@@ -17,11 +17,7 @@ const SImgSquare = styled.div`
     padding-bottom: 25%;
   }
 `;
-export const ImgSource = ({
-  currentScrollYPosition,
-  primaryImg,
-  secondaryImg,
-}) => {
+export const ImgSource = ({ primaryImg, secondaryImg }) => {
   const imgRef = useRef(null);
 
   const setPrimaryImg = () => {
@@ -30,19 +26,19 @@ export const ImgSource = ({
   const setSecondaryImg = () => {
     imgRef.current.src = secondaryImg;
   };
-  const range = 250;
+  const handleScroll = () => {
+    console.log('hi');
+    // const { top, bottom } = imgRef.current.getBoundingClientRect();
+    // const isTopOfImgNorthOfWindow = top < 0;
+    // const isBottomOfImgSouthOfWindow = bottom > window.innerHeight;
+    // const condition = !isTopOfImgNorthOfWindow && !isBottomOfImgSouthOfWindow;
+  };
   useEffect(() => {
-    const { top, bottom } = imgRef.current.getBoundingClientRect();
-    const isTopOfImgNorthOfWindow = top < 0;
-    const isBottomOfImgSouthOfWindow = bottom > window.innerHeight;
-    const condition = !isTopOfImgNorthOfWindow && !isBottomOfImgSouthOfWindow;
-    if (condition) {
-      imgRef.current.src = primaryImg;
-      console.log('erueka');
-    } else {
-      imgRef.current.src = secondaryImg;
-    }
-  }, [currentScrollYPosition]);
+    window.addEventListener('scroll', handleScroll);
+    return function cleanup() {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
   return (
     <SImgSquare>
       <img
@@ -50,7 +46,7 @@ export const ImgSource = ({
         ref={imgRef}
         onMouseOver={setPrimaryImg}
         // onMouseOut={setSecondaryImg}
-      ></img>
+      />
     </SImgSquare>
   );
 };
