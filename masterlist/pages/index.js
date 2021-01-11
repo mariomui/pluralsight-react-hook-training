@@ -29,6 +29,7 @@ const SBottomContainer = styled(SContainer)`
   justify-content: flex-end;
   align-items: flex-start;
   padding: 2em 0em;
+  height: 90%;
 `;
 
 const SContent = styled.section`
@@ -74,6 +75,7 @@ const Index = () => {
   // i have to debounce the handler.
   const [inputText, setInputText] = useState('');
   const [textHistory, setTextHistory] = useState([]);
+  const [saveCounter, setSaveCounter] = useState(0);
   /*
   everytime a prop renders the function gets activated.
   The callback is a simple ignore flag.
@@ -86,24 +88,37 @@ const Index = () => {
   //   debounce((value) => {
   //     console.log(value, 'saving');
   //   }, 1200),
-  //   []
+  //   []21
   // );
 
   const debouncedSearch = useCallback(
     debounce((value) => {
       console.log(value, 'saving');
       console.log(textHistory.concat(value), 'concatted value');
-      setTextHistory(textHistory.concat(value));
-    }, 100),
+      setSaveCounter(saveCounter + 1);
+      setTextHistory([...textHistory, value]);
+    }, 200),
     []
   );
-  const handleOnInputChange = (e) => {
+  const handleOnInputChange = useCallback((e) => {
     setInputText(e.target.value);
-    // debouncedSearch(e.target.value);
+    debouncedSearch(e.target.value);
+
     // if the debounce search changes the inputText and resets all the state.
     // try putting in debounced search again, the render of that state will clear stuff out.
-    setTextHistory([...textHistory, e.target.value]);
-  };
+    // it might be better to do a useEffect so that the component renders, and then we change
+    // stuff.
+    // setTextHistory([...textHistory, e.target.value]);
+  }, []);
+
+  useEffect(() => {
+    console.log(saveCounter, 'does counter reset');
+    if (inputText.length) {
+      setTextHistory([...textHistory, inputText]);
+    } else {
+      console.log('khnb ');
+    }
+  }, [saveCounter]);
 
   return (
     <GeneralLayout>
