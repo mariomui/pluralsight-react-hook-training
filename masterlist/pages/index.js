@@ -17,26 +17,44 @@ const SInputElement = styled.input`
 const SContainer = styled.div`
   margin: 0 auto;
   max-width: 90%;
-  border: 1px solid blue;
+`;
+const STopContainer = styled(SContainer)`
+  display: flex;
   justify-content: flex-end;
   align-items: center;
-  height: 100%;
-  display: flex;
 `;
+const SBottomContainer = styled(SContainer)`
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-start;
+  padding: 2em 0em;
+`;
+
 const SContent = styled.section`
   position: relative;
   display: flex;
   height: 100%;
   width: 100%;
+  flex-wrap: wrap;
+  > article {
+    flex-grow: 1;
+    flex-basis: calc((2200px - 100%) * 999);
+  }
 `;
 const STopBanner = styled.article`
   background: greenyellow;
-  /* flex: 0 0 100%; */
-  width: 100%;
-
   height: 25%;
+
   align-items: center;
 `;
+
+const SListedText = styled.article`
+  background: lightyellow;
+  height: 75%;
+`;
+
+const STopText = styled.div``;
+
 const Index = () => {
   // i have to debounce the handler.
   const [inputText, setInputText] = useState('');
@@ -67,7 +85,7 @@ const Index = () => {
     <GeneralLayout>
       <SContent>
         <STopBanner>
-          <SContainer>
+          <STopContainer>
             <SInputElement
               placeholder="Enter some text"
               onChange={handleOnInputChange}
@@ -75,8 +93,11 @@ const Index = () => {
               type="text"
               value={inputText}
             />
-          </SContainer>
+          </STopContainer>
         </STopBanner>
+        <SListedText>
+          <SBottomContainer>{inputText}</SBottomContainer>
+        </SListedText>
       </SContent>
     </GeneralLayout>
   );
