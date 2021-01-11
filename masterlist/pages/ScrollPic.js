@@ -7,6 +7,7 @@ import { css } from '@emotion/react';
 export default function ScrollPic() {
   const [windowTitle, setWindowTitle] = useState(0);
 
+  const [mouseEventCount, setMouseEventCount] = useState(0);
   const handleMouseOver = useCallback((sid) => {
     setWindowTitle(sid);
   }, []);
@@ -28,13 +29,26 @@ export default function ScrollPic() {
         }
       `}
     >
+      <span
+        css={css`
+          font-size: 30px;
+        `}
+      >
+        {mouseEventCount}
+      </span>
+
       {[187, 823, 1124, 1269].map((sid) => {
         const primaryImg = `static/speakers/Speaker-${sid}.jpg`;
         const secondaryImg = `static/speakers/bw/Speaker-${sid}.jpg`;
         return (
           <div
+            css={css`
+              display: inline-block;
+              width: 50%;
+            `}
             key={sid}
             onMouseOver={(e) => {
+              setMouseEventCount(mouseEventCount + 1);
               console.log(sid, 'onmouse overed');
               handleMouseOver(sid);
             }}
