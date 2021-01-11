@@ -18,26 +18,18 @@ export default function ScrollPic() {
         }
       `}
     >
-      <ImgSource
-        currentScrollYPosition={currentScrollYPosition}
-        primaryImg="static/speakers/Speaker-187.jpg"
-        secondaryImg="static/speakers/bw/Speaker-187.jpg"
-      />
-      <ImgSource
-        currentScrollYPosition={currentScrollYPosition}
-        primaryImg="static/speakers/Speaker-823.jpg"
-        secondaryImg="static/speakers/bw/Speaker-823.jpg"
-      />
-      <ImgSource
-        currentScrollYPosition={currentScrollYPosition}
-        primaryImg="static/speakers/Speaker-1124.jpg"
-        secondaryImg="static/speakers/bw/Speaker-1124.jpg"
-      />
-      <ImgSource
-        currentScrollYPosition={currentScrollYPosition}
-        primaryImg="static/speakers/Speaker-1269.jpg"
-        secondaryImg="static/speakers/bw/Speaker-1269.jpg"
-      />
+      {[187, 823, 1124, 1269].map((sid) => {
+        const primaryImg = `static/speakers/Speaker-${sid}.jpg`;
+        const secondaryImg = `static/speakers/bw/Speaker-${sid}.jpg`;
+        return (
+          <ImgSource
+            key={sid}
+            src={secondaryImg}
+            primaryImg={primaryImg}
+            secondaryImg={secondaryImg}
+          />
+        );
+      })}
     </section>
   );
 }
