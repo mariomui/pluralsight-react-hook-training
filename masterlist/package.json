@@ -27,6 +27,11 @@
     "react-dom": "^16.14.0"
   },
   "devDependencies": {
-    "@emotion/babel-preset-css-prop": "^11.0.0"
+    "@emotion/babel-preset-css-prop": "^11.0.0",
+    "eslint": "^7.17.0",
+    "eslint-plugin-react-hooks": "^4.2.0",
+    "prettier": "^2.2.1",
+    "react-hooks": "^1.0.1",
+    "react-performance": "0.0.5"
   }
 }

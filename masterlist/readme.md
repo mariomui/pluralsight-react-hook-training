@@ -1,0 +1,1 @@
+npm install -D eslint eslint-plugin-react-hooks prettier react-hooks react-performance
