@@ -1,7 +1,7 @@
 // import Image from 'next/image';
 
 import styled from '@emotion/styled';
-import React, { useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 
 const SImgSquare = styled.div`
   position: relative;
@@ -17,21 +17,37 @@ const SImgSquare = styled.div`
     padding-bottom: 100%;
   }
 `;
-export const ImgSource = ({ primaryImg, secondaryImg }) => {
+export const ImgSource = ({
+  currentScrollYPosition,
+  primaryImg,
+  secondaryImg,
+}) => {
   const imgRef = useRef(null);
+
   const setPrimaryImg = () => {
     imgRef.current.src = primaryImg;
   };
   const setSecondaryImg = () => {
     imgRef.current.src = secondaryImg;
   };
+  useEffect(() => {
+    const dim = imgRef.current.getBoundingClientRect();
+    console.log(primaryImg, dim, currentScrollYPosition);
+    if (dim.y > -200 && dim.y < 200) {
+      imgRef.current.src = primaryImg;
+      console.log(dim.top, currentScrollYPosition);
+      console.log('erueka');
+    } else {
+      imgRef.current.src = secondaryImg;
+    }
+  }, [currentScrollYPosition]);
   return (
     <SImgSquare>
       <img
         src={secondaryImg}
         ref={imgRef}
         onMouseOver={setPrimaryImg}
-        onMouseOut={setSecondaryImg}
+        // onMouseOut={setSecondaryImg}
       ></img>
     </SImgSquare>
   );
