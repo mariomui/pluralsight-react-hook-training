@@ -84,12 +84,28 @@ const Index = () => {
   the dom renders the state. 
   this is not a good example of how to useCallback though. dammit.
   */
-  // const debouncedSearch = useCallback(
-  //   debounce((value) => {
-  //     console.log(value, 'saving');
-  //   }, 1200),
-  //   []21
-  // );
+  /*
+  const debouncedSearch = useCallback(
+    debounce((value) => {
+      console.log(value, 'saving');
+    }, 1200),
+    []21
+  );
+  */
+  const random = Number(Math.random().toFixed(2).split('.')[1]);
+  const [isLoading, setIsLoading] = useState(true);
+
+  if (random % 2 === 0) {
+    // const [isLoading, setIsLoading] = useState(true);
+  } else {
+    // const [isLoading, setIsLoading] = useState(true);
+  }
+
+  useEffect(() => {
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 2000);
+  });
 
   const debouncedSearch = useCallback(
     debounce((value) => {
