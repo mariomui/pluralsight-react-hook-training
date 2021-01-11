@@ -5,30 +5,8 @@ import { css } from '@emotion/react';
 // import speaker1 from '@images/speakers/Speaker-187.jpg';
 
 export default function ScrollPic() {
-  // listen to scroll
-  const [currentScrollYPosition, setCurrentScrollYPosition] = useState(0);
-  const scrollRef = useRef(null);
-  const handleScroll = useCallback(function (e) {
-    setCurrentScrollYPosition(e.target.scrollTop);
-  }, []);
-  useEffect(() => {
-    const $listen = scrollRef?.current;
-    if ($listen) {
-      $listen.addEventListener('scroll', handleScroll);
-      return function cleanup() {
-        $listen.removeEventListener('scroll', handleScroll);
-      };
-    } else {
-      console.log('no dom');
-    }
-  }, []);
-  // get position.
-  // report position to img sources.
-  // if image sources are in the same position as the scroll, then light up.
-
   return (
     <section
-      ref={scrollRef}
       css={css`
         overflow: auto;
         display: flex;
