@@ -50,6 +50,11 @@ export default function ScrollPic() {
             onMouseOver={(e) => {
               setMouseEventCount(mouseEventCount + 1);
               console.log(sid, 'onmouse overed');
+              /*
+              handleMouseOver uses a state hook that sets the sid. The state doesn't change that often. so React knows to not rerender.
+              But multiple set states would then rerender the component and the useEffect will keep firing. 
+              Experiment withou removing windowTitle.
+              */
               handleMouseOver(sid);
             }}
           >
