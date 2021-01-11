@@ -2,6 +2,7 @@ import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import styled from '@emotion/styled';
 import { debounce } from '../core/helper';
 import { GeneralLayout } from '../components/layouts/GeneralLayout';
+import { css, jsx } from '@emotion/react';
 
 /*
 A Smart Component is any component which manages its own state. 
@@ -44,7 +45,6 @@ const SContent = styled.section`
 const STopBanner = styled.article`
   background: greenyellow;
   height: 25%;
-
   align-items: center;
 `;
 
@@ -53,7 +53,15 @@ const SListedText = styled.article`
   height: 75%;
 `;
 
-const STopText = styled.div``;
+const SInputCol = styled.div`
+  display: flex;
+  flex-flow: column;
+  align-items: space-between;
+  justify-content: center; // columns uses this to vertically center;
+  outline: 1px solid white;
+  flex: 0 0 25%;
+  height: 90%;
+`;
 
 const Index = () => {
   // i have to debounce the handler.
@@ -86,17 +94,26 @@ const Index = () => {
       <SContent>
         <STopBanner>
           <STopContainer>
-            <SInputElement
-              placeholder="Enter some text"
-              onChange={handleOnInputChange}
-              name="example"
-              type="text"
-              value={inputText}
-            />
+            <SInputCol>
+              <SInputElement
+                placeholder="Enter some text"
+                onChange={handleOnInputChange}
+                name="example"
+                type="text"
+                value={inputText}
+              />
+              <span
+                css={css`
+                  min-height: 10%;
+                `}
+              >
+                {inputText}
+              </span>
+            </SInputCol>
           </STopContainer>
         </STopBanner>
         <SListedText>
-          <SBottomContainer>{inputText}</SBottomContainer>
+          <SBottomContainer></SBottomContainer>
         </SListedText>
       </SContent>
     </GeneralLayout>
