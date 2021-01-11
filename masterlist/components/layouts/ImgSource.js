@@ -14,7 +14,7 @@ const SImgSquare = styled.div`
   > img::after {
     display: block;
     content: '';
-    padding-bottom: 100%;
+    padding-bottom: 25%;
   }
 `;
 export const ImgSource = ({
@@ -30,12 +30,14 @@ export const ImgSource = ({
   const setSecondaryImg = () => {
     imgRef.current.src = secondaryImg;
   };
+  const range = 250;
   useEffect(() => {
-    const dim = imgRef.current.getBoundingClientRect();
-    console.log(primaryImg, dim, currentScrollYPosition);
-    if (dim.y > -200 && dim.y < 200) {
+    const { top, bottom } = imgRef.current.getBoundingClientRect();
+    const isTopOfImgNorthOfWindow = top < 0;
+    const isBottomOfImgSouthOfWindow = bottom > window.innerHeight;
+    const condition = !isTopOfImgNorthOfWindow && !isBottomOfImgSouthOfWindow;
+    if (condition) {
       imgRef.current.src = primaryImg;
-      console.log(dim.top, currentScrollYPosition);
       console.log('erueka');
     } else {
       imgRef.current.src = secondaryImg;
