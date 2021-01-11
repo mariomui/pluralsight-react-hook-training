@@ -8,13 +8,13 @@ const SImgSquare = styled.div`
   width: 100%;
   > img {
     max-width: 100%;
-    width: 50%;
+    width: 100%;
     height: auto;
   }
   > img::after {
     display: block;
     content: '';
-    padding-bottom: 25%;
+    padding-bottom: 100%;
   }
 `;
 export const ImgSource = ({ primaryImg, secondaryImg }) => {
