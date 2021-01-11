@@ -1,6 +1,7 @@
 import styled from '@emotion/styled';
 const SMain = styled.main`
-  height: 100%;
+  height: 100vh;
+  width: 100vw;
 `;
 
 export function GeneralLayout({ children }) {
