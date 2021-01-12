@@ -5,6 +5,8 @@ import { GeneralLayout } from '../components/layouts/GeneralLayout';
 import { css, jsx } from '@emotion/react';
 import { InputElement } from '@components/InputText';
 import { RDate } from '@components/RDate';
+import { NavBar } from '@components/NavBar';
+import ScrollPic from '@components/ScrollPic';
 
 /*
 A Smart Component is any component which manages its own state. 
@@ -176,6 +178,9 @@ const Index = () => {
                 );
               })}
             </STextHistoryBox>
+            <NavBar></NavBar>
+            <ScrollPic></ScrollPic>
+            {/* speaker */}
           </SBottomContainer>
         </SListedText>
       </SContent>

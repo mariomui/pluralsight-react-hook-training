@@ -1,8 +1,13 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+import React, {
+  createRef,
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+} from 'react';
 import styled from '@emotion/styled';
-import { ImgSource } from '../components/layouts/ImgSource';
+import { ImgSource } from './layouts/ImgSource';
 import { css } from '@emotion/react';
-// import speaker1 from '@images/speakers/Speaker-187.jpg';
 
 export default function ScrollPic() {
   const [windowTitle, setWindowTitle] = useState(0);
@@ -12,12 +17,15 @@ export default function ScrollPic() {
     setWindowTitle(sid);
   }, []);
 
+  const primaryRef = createRef(null);
+
   useEffect(() => {
     window.document.title = windowTitle + '';
     console.log(windowTitle, 'setting useeffect in windowtitle');
   }, [windowTitle]);
   return (
     <section
+      ref={primaryRef}
       css={css`
         overflow: auto;
         display: flex;
@@ -59,6 +67,7 @@ export default function ScrollPic() {
             }}
           >
             <ImgSource
+              ref={primaryRef}
               src={secondaryImg}
               primaryImg={primaryImg}
               secondaryImg={secondaryImg}
