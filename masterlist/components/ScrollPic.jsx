@@ -24,9 +24,21 @@ const speakerIds = [
   10803,
   10808,
   18805,
-  39062,
+  41808,
 ];
-
+const SPortraitGallery = styled.section`
+  display: flex;
+  --gap: 1rem;
+  flex-wrap: wrap;
+  margin: calc(var(--gap) * -1);
+`;
+const SSpeakerPortrait = styled.div`
+  flex-grow: 1;
+  /* min-width: 33%; */
+  /* display: flex; ; */
+  margin: var(--gap);
+  flex-basis: calc(200px - 100%) * 9999;
+`;
 export default function ScrollPic() {
   const [windowTitle, setWindowTitle] = useState(0);
 
@@ -55,7 +67,7 @@ export default function ScrollPic() {
     window.document.title = windowTitle + '';
   }, [windowTitle]);
   return (
-    <section
+    <SPortraitGallery
       ref={primaryRef}
       css={css`
         /* overflow: auto; */
@@ -82,12 +94,11 @@ export default function ScrollPic() {
         const primaryImg = `static/speakers/Speaker-${sid}.jpg`;
         const secondaryImg = `static/speakers/bw/Speaker-${sid}.jpg`;
         return (
-          <div
+          <SSpeakerPortrait
             css={css`
-              display: inline-block;
-              width: 33%;
+              /* width: 33%;
               flex-grow: 1;
-              flex-basis: 50%;
+              flex-basis: 33%; */
             `}
             key={sid}
             onMouseOver={(e) => {
@@ -109,9 +120,9 @@ export default function ScrollPic() {
               primaryImg={primaryImg}
               secondaryImg={secondaryImg}
             />
-          </div>
+          </SSpeakerPortrait>
         );
       })}
-    </section>
+    </SPortraitGallery>
   );
 }
