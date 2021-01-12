@@ -1,7 +1,13 @@
 // import Image from 'next/image';
 
 import styled from '@emotion/styled';
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+import React, {
+  forwardRef,
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+} from 'react';
 
 const SImgSquare = styled.div`
   position: relative;
@@ -17,7 +23,7 @@ const SImgSquare = styled.div`
     padding-bottom: 100%;
   }
 `;
-export const ImgSource = ({ primaryImg, secondaryImg }) => {
+export const ImgSource = forwardRef(({ primaryImg, secondaryImg }, ref) => {
   const imgRef = useRef(null);
   const [isImgWithinView, setIsImgWithinView] = useState(false);
 
@@ -33,8 +39,10 @@ export const ImgSource = ({ primaryImg, secondaryImg }) => {
 
   const checkIfImgInView = useCallback(() => {
     const { top, bottom } = imgRef.current.getBoundingClientRect();
-    const isTopOfImgNorthOfWindow = top < 0;
-    const isBottomOfImgSouthOfWindow = bottom > window.innerHeight;
+    const { top: rtop, bottom: rbottom } = ref.current.getBoundingClientRect();
+    console.log(ref.current, rtop, rbottom);
+    const isTopOfImgNorthOfWindow = top < rtop;
+    const isBottomOfImgSouthOfWindow = bottom > rbottom;
     return !isTopOfImgNorthOfWindow && !isBottomOfImgSouthOfWindow;
   }, []);
   const handleScroll = useCallback(() => {
@@ -53,9 +61,9 @@ export const ImgSource = ({ primaryImg, secondaryImg }) => {
     setIsImgWithinView(checkIfImgInView());
 
     // handles the toggle on Scroll
-    window.addEventListener('scroll', handleScroll);
+    ref.current.addEventListener('scroll', handleScroll);
     return function cleanup() {
-      window.removeEventListener('scroll', handleScroll);
+      ref.current.removeEventListener('scroll', handleScroll);
     };
   }, []);
   return (
@@ -74,4 +82,4 @@ export const ImgSource = ({ primaryImg, secondaryImg }) => {
       />
     </SImgSquare>
   );
-};
+});
