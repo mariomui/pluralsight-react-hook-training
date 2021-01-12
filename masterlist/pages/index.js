@@ -4,6 +4,7 @@ import { debounce } from '../core/helper';
 import { GeneralLayout } from '../components/layouts/GeneralLayout';
 import { css, jsx } from '@emotion/react';
 import { InputElement } from '@components/InputText';
+import { RDate } from '@components/RDate';
 
 /*
 A Smart Component is any component which manages its own state. 
@@ -55,6 +56,10 @@ const SListedText = styled.article`
   height: 75%;
 `;
 
+const SLeftDAteTimeCol = styled.div`
+  display: flex;
+  align-items: center;
+`;
 const SInputCol = styled.div`
   height: 0;
   display: flex;
@@ -72,6 +77,7 @@ const STextHistoryBox = styled.div`
   outline: 1px solid white;
   flex: 0 0 25%;
 `;
+
 const Index = () => {
   // i have to debounce the handler.
   const [inputText, setInputText] = useState('');
@@ -126,12 +132,17 @@ const Index = () => {
   // useEffect(() => {
   //   debouncedSearch(inputText);
   // }, [inputText]);
+
   return (
     <GeneralLayout>
       <SContent>
         <STopBanner>
           <STopContainer>
+            <SLeftDAteTimeCol>
+              <RDate />
+            </SLeftDAteTimeCol>
             <SInputCol>
+              <h1>Mario's Hooks School</h1>
               <InputElement
                 placeholder="Enter some text"
                 handleOnInputChange={handleOnInputChange}
