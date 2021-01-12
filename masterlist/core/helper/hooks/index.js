@@ -1,13 +1,24 @@
-import { useEffect, useMemo } from 'react';
+import {
+  createRef,
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from 'react';
 
-// terrible.
-export function useDebounce(fn, delay) {
-  const [timeoutId, setTimeoutID] = useState(null);
-  // call the function
-  return (
-    useMemo((...args) => {
-      return fn(...args);
-    }),
-    [fn]
-  );
-}
+export const useRefWithCallback = (cb) => {
+  /*
+  the logic is that i create the ref, and a function that can acess the ref.
+  setRef should be able to have access to it.
+   */
+  const ref = createRef(null);
+  const setRef = useCallback((node) => {
+    if (node) {
+      cb(node);
+    }
+    ref.current = node;
+  }, []);
+
+  return [setRef];
+};

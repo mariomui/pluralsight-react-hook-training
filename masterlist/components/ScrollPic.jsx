@@ -6,8 +6,24 @@ import React, {
   useState,
 } from 'react';
 import styled from '@emotion/styled';
-import { ImgSource } from './layouts/ImgSource';
+import { ImgSource } from '@components/ImgSource';
 import { css } from '@emotion/react';
+import { useRefWithCallback } from 'core/helper/hooks';
+
+const speakerIds = [
+  187,
+  823,
+  1124,
+  1269,
+  1530,
+  1725,
+  2920,
+  5996,
+  6548,
+  8367,
+  8590,
+  10803,
+];
 
 export default function ScrollPic() {
   const [windowTitle, setWindowTitle] = useState(0);
@@ -17,11 +33,20 @@ export default function ScrollPic() {
     setWindowTitle(sid);
   }, []);
 
-  const primaryRef = createRef(null);
+  const [node, setNode] = useState(null);
+  const handleCallback = useCallback((node) => {
+    setNode(node);
+    return node;
+  }, []);
+  const [primaryRef] = useRefWithCallback(handleCallback);
+  const [isLoading, setLoading] = useState(true);
+
+  useEffect(() => {
+    setLoading(false);
+  }, [isLoading]);
 
   useEffect(() => {
     window.document.title = windowTitle + '';
-    console.log(windowTitle, 'setting useeffect in windowtitle');
   }, [windowTitle]);
   return (
     <section
@@ -30,29 +55,33 @@ export default function ScrollPic() {
         overflow: auto;
         display: flex;
         position: relative;
-        flex-flow: column;
-        margin-bottom: 10%;
+        flex-wrap: wrap;
+        /* flex-flow: column; */
+        /* margin-bottom: 10%; */
+
         > div:last-of-type {
           padding-bottom: 10%;
         }
       `}
     >
-      <span
+      {/* <span
         css={css`
           font-size: 30px;
         `}
       >
         {mouseEventCount}
-      </span>
+      </span> */}
 
-      {[187, 823, 1124, 1269].map((sid) => {
+      {speakerIds.map((sid) => {
         const primaryImg = `static/speakers/Speaker-${sid}.jpg`;
         const secondaryImg = `static/speakers/bw/Speaker-${sid}.jpg`;
         return (
           <div
             css={css`
               display: inline-block;
-              width: 50%;
+              width: 33%;
+              flex-grow: 1;
+              flex-basis: 33%;
             `}
             key={sid}
             onMouseOver={(e) => {
@@ -68,7 +97,7 @@ export default function ScrollPic() {
           >
             <ImgSource
               ref={primaryRef}
-              src={secondaryImg}
+              handleCallback={handleCallback}
               primaryImg={primaryImg}
               secondaryImg={secondaryImg}
             />

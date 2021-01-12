@@ -25,8 +25,9 @@ const SContainer = styled.div`
 `;
 const STopContainer = styled(SContainer)`
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-around;
   align-items: center;
+  height: 100%;
 `;
 const SBottomContainer = styled(SContainer)`
   display: flex;
@@ -34,6 +35,7 @@ const SBottomContainer = styled(SContainer)`
   align-items: flex-start;
   padding: 2em 0em;
   height: 90%;
+  flex-flow: column;
 `;
 
 const SContent = styled.section`
@@ -44,12 +46,14 @@ const SContent = styled.section`
   flex-wrap: wrap;
   > article {
     flex-grow: 1;
-    flex-basis: calc((2200px - 100%) * 999);
+    flex-basis: calc((2200px - 50%) * 999);
   }
 `;
 const STopBanner = styled.article`
   background: greenyellow;
+  width: 100%;
   height: 25%;
+  font-size: 3rem;
   align-items: center;
 `;
 
@@ -61,6 +65,7 @@ const SListedText = styled.article`
 const SLeftDAteTimeCol = styled.div`
   display: flex;
   align-items: center;
+  flex: 0 0 30%;
 `;
 const SInputCol = styled.div`
   height: 0;
@@ -68,8 +73,17 @@ const SInputCol = styled.div`
   flex-flow: column;
   align-items: space-between;
   justify-content: center; // columns uses this to vertically center;
-  flex: 0 0 25%;
+  flex: 0 0 40%;
   /* height: 90%; */
+  h2 {
+    margin: 0;
+  }
+`;
+
+const SInputElementContainer = styled.div`
+  max-width: 95%;
+  margin: 0 auto;
+  margin-left: 0;
 `;
 const STextHistoryBox = styled.div`
   display: flex;
@@ -144,14 +158,19 @@ const Index = () => {
               <RDate />
             </SLeftDAteTimeCol>
             <SInputCol>
-              <h1>Mario's Hooks School</h1>
-              <InputElement
-                placeholder="Enter some text"
-                handleOnInputChange={handleOnInputChange}
-                name="example"
-                type="text"
-                value={inputText}
-              />
+              <h2>Mario's Hooks School</h2>
+              <SInputElementContainer>
+                <InputElement
+                  css={css`
+                    font-size: 3rem;
+                  `}
+                  placeholder="Enter some text"
+                  handleOnInputChange={handleOnInputChange}
+                  name="example"
+                  type="text"
+                  value={inputText}
+                />
+              </SInputElementContainer>
               <span
                 css={css`
                   min-height: 10%;
@@ -164,7 +183,7 @@ const Index = () => {
         </STopBanner>
         <SListedText>
           <SBottomContainer>
-            <STextHistoryBox>
+            {/* <STextHistoryBox>
               {textHistory.map((text, i) => {
                 return (
                   <div
@@ -177,7 +196,7 @@ const Index = () => {
                   </div>
                 );
               })}
-            </STextHistoryBox>
+            </STextHistoryBox> */}
             <NavBar></NavBar>
             <ScrollPic></ScrollPic>
             {/* speaker */}
