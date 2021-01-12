@@ -3,14 +3,14 @@ import styled from '@emotion/styled';
 import Link from 'next/link';
 
 const SBar = styled.ul`
-  --gap: 4rem;
+  --gap: 0.5rem;
   position: relative;
   display: flex;
-  margin: calc(-1 * var(--gap));
+  margin: calc(var(--gap * -1));
   list-style: none;
-  width: 100%;
-  font-size: 3rem;
-  li {
+  width: 0;
+  font-size: 1rem;
+  > li {
     margin: var(--gap);
   }
 `;

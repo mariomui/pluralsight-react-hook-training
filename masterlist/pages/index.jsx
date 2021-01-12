@@ -28,14 +28,21 @@ const STopContainer = styled(SContainer)`
   justify-content: space-around;
   align-items: center;
   height: 100%;
+
+  flex-wrap: wrap;
+  > * {
+    flex-basis: calc(415px - 100%) * 999;
+    flex-grow: 1;
+  }
 `;
 const SBottomContainer = styled(SContainer)`
   display: flex;
   justify-content: flex-end;
   align-items: flex-start;
-  padding: 2em 0em;
-  height: 90%;
+  padding: 1em 0em;
+  /* height: 90%; */
   flex-flow: column;
+  flex-grow: 1;
 `;
 
 const SContent = styled.section`
@@ -52,32 +59,35 @@ const SContent = styled.section`
 const STopBanner = styled.article`
   background: greenyellow;
   width: 100%;
-  height: 25%;
-  font-size: 3rem;
+  /* height: 25%; */
+  font-size: 1rem;
   align-items: center;
+  padding: 2em 0em;
 `;
 
 const SListedText = styled.article`
   background: lightyellow;
-  height: 75%;
+  /* height: 75%; */
 `;
 
 const SLeftDAteTimeCol = styled.div`
   display: flex;
   align-items: center;
-  flex: 0 0 30%;
+  /* flex: 0 0 30%; */
+  /* width: 50%; */
 `;
 const SInputCol = styled.div`
-  height: 0;
+  height: 100%;
   display: flex;
   flex-flow: column;
   align-items: space-between;
   justify-content: center; // columns uses this to vertically center;
-  flex: 0 0 40%;
-  /* height: 90%; */
-  h2 {
-    margin: 0;
-  }
+  /* flex: 0 0 40%; */
+  /* width: 50%; */
+`;
+const STitle = styled.h2`
+  font-size: 1.5rem;
+  margin: 0;
 `;
 
 const SInputElementContainer = styled.div`
@@ -158,11 +168,11 @@ const Index = () => {
               <RDate />
             </SLeftDAteTimeCol>
             <SInputCol>
-              <h2>Mario's Hooks School</h2>
+              <STitle>Mario's Hooks School</STitle>
               <SInputElementContainer>
                 <InputElement
                   css={css`
-                    font-size: 3rem;
+                    font-size: 1rem;
                   `}
                   placeholder="Enter some text"
                   handleOnInputChange={handleOnInputChange}

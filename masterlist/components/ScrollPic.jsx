@@ -17,12 +17,14 @@ const speakerIds = [
   1269,
   1530,
   1725,
-  2920,
   5996,
   6548,
   8367,
   8590,
   10803,
+  10808,
+  18805,
+  39062,
 ];
 
 export default function ScrollPic() {
@@ -56,7 +58,7 @@ export default function ScrollPic() {
     <section
       ref={primaryRef}
       css={css`
-        overflow: auto;
+        /* overflow: auto; */
         display: flex;
         position: relative;
         flex-wrap: wrap;
@@ -85,7 +87,7 @@ export default function ScrollPic() {
               display: inline-block;
               width: 33%;
               flex-grow: 1;
-              flex-basis: 33%;
+              flex-basis: 50%;
             `}
             key={sid}
             onMouseOver={(e) => {

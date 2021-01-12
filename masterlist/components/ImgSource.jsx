@@ -39,20 +39,29 @@ export const ImgSource = forwardRef((props, ref) => {
   };
 
   const checkIfImgInView = useCallback((theNode) => {
-    const { top, bottom } = imgRef.current.getBoundingClientRect();
-    const { top: rtop, bottom: rbottom } = theNode.getBoundingClientRect();
+    const { top, bottom, x, y } = imgRef.current.getBoundingClientRect();
+    // const { top: rtop, bottom: rbottom } = theNode.getBoundingClientRect();
+    const rtop = 0;
+    console.log(top, bottom, x, y);
+    const rbottom = window.innerHeight;
     // console.log(ref.current, rtop, rbottom);
     const isTopOfImgNorthOfWindow = top < rtop;
     const isBottomOfImgSouthOfWindow = bottom > rbottom;
     const condition = !isTopOfImgNorthOfWindow && !isBottomOfImgSouthOfWindow;
+    console.log(condition);
     return condition;
   }, []);
-  const handleScroll = useCallback(() => {
-    if (theNode && theTrigger > 0) {
-      console.log(ref, theNode, 'reg');
-      setIsImgWithinView(checkIfImgInView(theNode));
-    }
-  }, [theTrigger]);
+  const handleScroll = useCallback(
+    () => {
+      if (theNode && theTrigger > 0) {
+        // console.log(ref, theNode, 'reg');
+        setIsImgWithinView(checkIfImgInView(theNode));
+      }
+    },
+    [
+      // theTrigger
+    ]
+  );
 
   useEffect(() => {
     // after render, show our image.
@@ -60,21 +69,28 @@ export const ImgSource = forwardRef((props, ref) => {
     setIsLoading(false);
   }, []);
 
-  useEffect(() => {
-    // handle the toggle on mount (after render);
-    let $copyref;
-    if (theTrigger > 0 && theNode) {
-      console.log(theNode);
+  useEffect(
+    () => {
+      // handle the toggle on mount (after render);
+      let $copyref;
+      // if (theTrigger > 0 && theNode) {
+      // console.log(theNode);
       setIsImgWithinView(checkIfImgInView(theNode));
-      theNode.addEventListener('scroll', handleScroll);
+      console.log(document.querySelector('main'));
+      window.document.addEventListener('scroll', handleScroll);
       $copyref = theNode;
-    }
+      // }
 
-    // handles the toggle on Scroll
-    return function cleanup() {
-      $copyref && $copyref.removeEventListener('scroll', handleScroll);
-    };
-  }, [theTrigger]);
+      // handles the toggle on Scroll
+      return function cleanup() {
+        // $copyref && $copyref.removeEventListener('scroll', handleScroll);
+        window.document.removeEventListener('scroll', handleScroll);
+      };
+    },
+    [
+      // theTrigger
+    ]
+  );
   return (
     <SImgSquare>
       <img
