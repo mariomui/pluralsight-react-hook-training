@@ -3,6 +3,7 @@ import styled from '@emotion/styled';
 import { debounce } from '../core/helper';
 import { GeneralLayout } from '../components/layouts/GeneralLayout';
 import { css, jsx } from '@emotion/react';
+import { InputElement } from '@components/InputText';
 
 /*
 A Smart Component is any component which manages its own state. 
@@ -55,19 +56,19 @@ const SListedText = styled.article`
 `;
 
 const SInputCol = styled.div`
+  height: 0;
   display: flex;
   flex-flow: column;
   align-items: space-between;
   justify-content: center; // columns uses this to vertically center;
-  outline: 1px solid white;
   flex: 0 0 25%;
-  height: 90%;
+  /* height: 90%; */
 `;
 const STextHistoryBox = styled.div`
   display: flex;
   flex-flow: column;
   /* align-items: space-between; */
-  justify-content: center; // columns uses this to vertically center;
+  justify-content: flex-start; // columns uses this to vertically center;
   outline: 1px solid white;
   flex: 0 0 25%;
 `;
@@ -95,56 +96,45 @@ const Index = () => {
   const random = Number(Math.random().toFixed(2).split('.')[1]);
   const [isLoading, setIsLoading] = useState(true);
 
-  if (random % 2 === 0) {
-    // const [isLoading, setIsLoading] = useState(true);
-  } else {
-    // const [isLoading, setIsLoading] = useState(true);
-  }
+  const debouncedSearch = debounce((value) => {
+    console.log(value, 'saving');
+    setSaveCounter(saveCounter + 1);
+    setTextHistory([...textHistory, value]);
+    setInputText('');
+  }, 1000);
 
-  useEffect(() => {
-    setTimeout(() => {
-      setIsLoading(false);
-    }, 2000);
-  });
+  const handleOnInputChange = useCallback(
+    (e) => {
+      setInputText(e.target.value);
 
-  const debouncedSearch = useCallback(
-    debounce((value) => {
-      console.log(value, 'saving');
-      console.log(textHistory.concat(value), 'concatted value');
-      setSaveCounter(saveCounter + 1);
-      setTextHistory([...textHistory, value]);
-    }, 200),
-    []
+      // if the debounce search changes the inputText and resets all the state.
+      // try putting in debounced search again, the render of that state will clear stuff out.
+      // it might be better to do a useEffect so that the component renders, and then we change
+      // stuff.
+      // setTextHistory([...textHistory, e.target.value]);
+      debouncedSearch(e.target.value);
+    },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [textHistory.length]
   );
-  const handleOnInputChange = useCallback((e) => {
-    setInputText(e.target.value);
-    debouncedSearch(e.target.value);
-
-    // if the debounce search changes the inputText and resets all the state.
-    // try putting in debounced search again, the render of that state will clear stuff out.
-    // it might be better to do a useEffect so that the component renders, and then we change
-    // stuff.
-    // setTextHistory([...textHistory, e.target.value]);
-  }, []);
-
-  useEffect(() => {
-    console.log(saveCounter, 'does counter reset');
-    if (inputText.length) {
-      setTextHistory([...textHistory, inputText]);
-    } else {
-      console.log('khnb ');
-    }
-  }, [saveCounter]);
-
+  // on first load, texthistorylen is 0. all functions are rendered.
+  // handleinputchange function is created. The keys keep hammering away but the function
+  // still uses the same setinputtext and the same debouncedSearch. So debounce works.
+  // At the end of the debounce, history.length changes.
+  // The next time handle on input change renders, a new function is fired, in the newer
+  // context. The one with a  populated text history.
+  // useEffect(() => {
+  //   debouncedSearch(inputText);
+  // }, [inputText]);
   return (
     <GeneralLayout>
       <SContent>
         <STopBanner>
           <STopContainer>
             <SInputCol>
-              <SInputElement
+              <InputElement
                 placeholder="Enter some text"
-                onChange={handleOnInputChange}
+                handleOnInputChange={handleOnInputChange}
                 name="example"
                 type="text"
                 value={inputText}
@@ -163,7 +153,16 @@ const Index = () => {
           <SBottomContainer>
             <STextHistoryBox>
               {textHistory.map((text, i) => {
-                return <div key={i}>{text}</div>;
+                return (
+                  <div
+                    css={css`
+                      height: unset;
+                    `}
+                    key={i}
+                  >
+                    {text}
+                  </div>
+                );
               })}
             </STextHistoryBox>
           </SBottomContainer>
