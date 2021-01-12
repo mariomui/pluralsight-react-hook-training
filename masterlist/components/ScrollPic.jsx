@@ -33,9 +33,13 @@ export default function ScrollPic() {
     setWindowTitle(sid);
   }, []);
 
-  const [node, setNode] = useState(null);
+  const [theNode, setNode] = useState(null);
+  const [theTrigger, setTrigger] = useState(0);
+
   const handleCallback = useCallback((node) => {
     setNode(node);
+    setTrigger(theTrigger + 1);
+    console.log(node, 'am i set');
     return node;
   }, []);
   const [primaryRef] = useRefWithCallback(handleCallback);
@@ -97,6 +101,8 @@ export default function ScrollPic() {
           >
             <ImgSource
               ref={primaryRef}
+              theNode={theNode}
+              theTrigger={theTrigger}
               handleCallback={handleCallback}
               primaryImg={primaryImg}
               secondaryImg={secondaryImg}
