@@ -2,7 +2,7 @@
 {
   "stdout": true,
   "template": "./auto-changelog/templates/changelog-template.in-use.hbs",
-  "unreleased": true,
+  "unreleased": false,
   "commitLimit": false,
   "sortCommits": "date",
   "package": true,

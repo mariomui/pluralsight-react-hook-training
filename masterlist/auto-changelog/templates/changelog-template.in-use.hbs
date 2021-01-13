@@ -1,13 +1,28 @@
 {{#each releases}}
-  Every release has a {{title}} and a {{href}} you can use to link to the commit diff.
-  It also has an {{isoDate}} and a {{niceDate}} you might want to use.
-  {{#each merges}}
-    - A merge has a {{message}}, an {{id}} and a {{href}} to the PR.
-  {{/each}}
-  {{#each fixes}}
-    - Each fix has a {{commit}} with a {{commit.subject}}, an {{id}} and a {{href}} to the fixed issue.
-  {{/each}}
-  {{#each commits}}
-    - Commits have a {{shorthash}}, a {{subject}} and a {{href}}, amongst other things.
-  {{/each}}
+  # {{title}}
+  [{{isoDate}}]
+  {{! lit commits with feature: in message, use feature: or Feature: }}
+  {{#commit-list
+  commits
+  heading='### Features'
+  message='(feature: )|(Feature: )'
+  exclude='(fix: )|(Fix: )|(break: )|(Break: )'}}
+    * {{subject}} ([`{{shorthash}}`]({{href}}))
+  {{/commit-list}}
+  {{! use fix: or Fix: }}
+  {{#commit-list
+  commits
+  heading='### Fixes'
+  message='(fix: )|(Fix: )'
+  exclude='(break: )|(Break: )|(Feature: )|(feature: )'}}
+    * {{subject}} ([`{{shorthash}}`]({{href}}))
+  {{/commit-list}}
+  {{! user break: or Break: }}
+  {{#commit-list
+  commits
+  heading='### Breaking changes'
+  message='(break: )|(Break: )'
+  exclude='(fix: )|(Fix: )|(Feature: )|(feature: )'}}
+    * {{subject}} ([`{{shorthash}}`]({{href}}))
+  {{/commit-list}}
 {{/each}}
