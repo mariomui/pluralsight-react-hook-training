@@ -45,6 +45,7 @@ export default function ScrollPic() {
   const [mouseEventCount, setMouseEventCount] = useState(0);
   const handleMouseOver = useCallback((sid) => {
     setWindowTitle(sid);
+    console.log('hi');
   }, []);
 
   const [theNode, setNode] = useState(null);
@@ -65,6 +66,7 @@ export default function ScrollPic() {
 
   useEffect(() => {
     window.document.title = windowTitle + '';
+    console.log('use effect is being called');
   }, [windowTitle]);
   return (
     <SPortraitGallery
