@@ -1,5 +1,5 @@
 {
-  "output": "RCHANGELOG.md",
+  "output": "CHANGELOG.md",
   "template": "auto-changelog/templates/normal.hbs",
   "unreleased": false,
   "commitLimit": false,
