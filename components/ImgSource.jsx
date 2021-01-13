@@ -52,10 +52,10 @@ export const ImgSource = forwardRef((props, ref) => {
   }, []);
   const handleScroll = useCallback(
     () => {
-      if (theNode && theTrigger > 0) {
-        // console.log(ref, theNode, 'reg');
-        setIsImgWithinView(checkIfImgInView(theNode));
-      }
+      // if (theNode && theTrigger > 0) {
+      // console.log(ref, theNode, 'reg');
+      setIsImgWithinView(checkIfImgInView(theNode));
+      // }
     },
     [
       // theTrigger
@@ -66,7 +66,7 @@ export const ImgSource = forwardRef((props, ref) => {
     // after render, show our image.
     // this allows time for the useEffect logic to either gray or color the image on load.
     setIsLoading(false);
-  }, []);
+  }, [isLoading]);
 
   useEffect(
     () => {
@@ -75,7 +75,7 @@ export const ImgSource = forwardRef((props, ref) => {
       // if (theTrigger > 0 && theNode) {
       setIsImgWithinView(checkIfImgInView(theNode));
       window.document.addEventListener('scroll', handleScroll);
-      $copyref = theNode;
+      // $copyref = theNode;
       // }
 
       // handles the toggle on Scroll
