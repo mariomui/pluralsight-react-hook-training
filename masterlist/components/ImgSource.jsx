@@ -42,7 +42,6 @@ export const ImgSource = forwardRef((props, ref) => {
     const { top, bottom, x, y } = imgRef.current.getBoundingClientRect();
     // const { top: rtop, bottom: rbottom } = theNode.getBoundingClientRect();
     const rtop = 0;
-    console.log(top, bottom, x, y);
     const rbottom = window.innerHeight;
     // console.log(ref.current, rtop, rbottom);
     const isTopOfImgNorthOfWindow = top < rtop;
@@ -74,9 +73,7 @@ export const ImgSource = forwardRef((props, ref) => {
       // handle the toggle on mount (after render);
       let $copyref;
       // if (theTrigger > 0 && theNode) {
-      // console.log(theNode);
       setIsImgWithinView(checkIfImgInView(theNode));
-      console.log(document.querySelector('main'));
       window.document.addEventListener('scroll', handleScroll);
       $copyref = theNode;
       // }
