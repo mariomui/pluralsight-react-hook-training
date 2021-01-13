@@ -1,3 +1,8 @@
+
+Unfortunately when i started this I did not fork the original repos or selectively clone a single subfolder.
+By then, i had already made several commits to the parent git. I dont want to lose my commits descritpions so i'm including the whole thing even though the masterlist folder contains all the lessons combined.
+
+--Mario
 # pluralsight-course-using-react-hooks (COURSE UPDATED AUG 12, 2020)
 The master branch here is the latest updates to the Pluralsight course published by Peter Kellner in August of 2020.
 
