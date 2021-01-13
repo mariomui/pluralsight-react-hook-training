@@ -1,9 +1,10 @@
 {
   "stdout": true,
-  "template": "./auto-changelog/templates/changelog-template.in-use.hbs",
+  "template": "auto-changelog/templates/normal.hbs",
   "unreleased": true,
   "commitLimit": false,
   "sortCommits": "date",
   "package": true,
-  "startingVersion": "v0.0.1"
+  "startingVersion": "v0.0.0",
+  "output": "RCHANGELOG.md"
 }

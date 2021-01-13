@@ -11,8 +11,8 @@
   ],
   "acl": {
     "test": "tested",
-    "changelogpath": "./CHANGELOG.md",
-    "template": "./acl-templates/normal.hbs"
+    "changelogpath": "RCHANGELOG.md",
+    "template": "auto-changelog/templates/normal.hbs"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -22,7 +22,8 @@
     "prodstart": "next start",
     "testscript": "echo $npm_package_config_test",
     "version": "auto-changelog -p && git add CHANGELOG.md",
-    "acl": "auto-changelog --starting-version v0.0.1 -o $npm_package_acl_changelogpath --template $npm_package_acl_template"
+    "acl": "auto-changelog",
+    "acltest": "auto-changelog -u --starting-version v0.0.0 -p -o $npm_package_acl_changelogpath --template $npm_package_acl_template"
   },
   "keywords": [],
   "author": "",
