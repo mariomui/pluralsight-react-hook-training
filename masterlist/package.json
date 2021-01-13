@@ -1,6 +1,6 @@
 {
   "name": "masterlist",
-  "version": "1.0.2-0",
+  "version": "1.0.2-2",
   "description": "",
   "main": "index.js",
   "explain": [
@@ -21,7 +21,7 @@
     "build": "next build",
     "prodstart": "next start",
     "testscript": "echo $npm_package_config_test",
-    "version": "auto-changelog -p && git add CHANGELOG.md",
+    "version": "auto-changelog -p && git add .",
     "acl": "auto-changelog",
     "acltest": "auto-changelog -u --starting-version v0.0.0 -p -o $npm_package_acl_changelogpath --template $npm_package_acl_template"
   },
