@@ -1,6 +1,6 @@
 {
   "name": "masterlist",
-  "version": "1.0.0",
+  "version": "1.0.1-6",
   "description": "",
   "main": "index.js",
   "explain": [
@@ -21,10 +21,10 @@
     "build": "next build",
     "prodstart": "next start",
     "testscript": "echo $npm_package_config_test",
-    "preversion": "git pull",
-    "version": "npm run acl && git add -A",
-    "postversion": "git push && git push -u --follow-tags",
-    "acl": "auto-changelog -o $npm_package_acl_changelogpath --template $npm_package_acl_template"
+    "preversion": "git pull && npm run acl",
+    "version": "git add -A",
+    "postversion": "git push",
+    "acl": "auto-changelog --starting-version v1.0.0 -o $npm_package_acl_changelogpath --template $npm_package_acl_template"
   },
   "keywords": [],
   "author": "",
