@@ -100,7 +100,7 @@ export const ImgSource = forwardRef((props, ref) => {
         }
         ref={imgRef}
         onMouseOver={setPrimaryImg}
-        // onMouseOut={setSecondaryImg}
+        onMouseOut={setSecondaryImg}
       />
     </SImgSquare>
   );
