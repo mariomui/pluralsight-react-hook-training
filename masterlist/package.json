@@ -22,7 +22,7 @@
     "prodstart": "next start",
     "testscript": "echo $npm_package_config_test",
     "version": "auto-changelog -p && git add CHANGELOG.md",
-    "acl": "auto-changelog --starting-version v1.0.0 -o $npm_package_acl_changelogpath --template $npm_package_acl_template"
+    "acl": "auto-changelog --starting-version v0.0.1 -o $npm_package_acl_changelogpath --template $npm_package_acl_template"
   },
   "keywords": [],
   "author": "",
