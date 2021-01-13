@@ -1,0 +1,48 @@
+{
+  "name": "masterlist",
+  "version": "1.0.4",
+  "description": "",
+  "main": "index.js",
+  "explain": [
+    "dev - Runs next dev which starts Next.js in development mode",
+    "build - Runs next build which builds the application for production usage",
+    "prodstart - Runs next start which starts a Next.js production server",
+    "https://nodejs.org/api/path.html will be used to describe config variables path includes filename and extension and location. basename, etc"
+  ],
+  "acl": {
+    "test": "tested",
+    "changelogpath": "RCHANGELOG.md",
+    "template": "auto-changelog/templates/normal.hbs"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "npm run dev",
+    "dev": "next dev",
+    "build": "next build",
+    "prodstart": "next start",
+    "testscript": "echo $npm_package_config_test",
+    "version": "auto-changelog -p && git add .",
+    "acl": "auto-changelog",
+    "acltest": "auto-changelog -u --starting-version v0.0.0 -p -o $npm_package_acl_changelogpath --template $npm_package_acl_template"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@emotion/css": "^11.1.3",
+    "@emotion/react": "^11.1.4",
+    "@emotion/styled": "^11.0.0",
+    "next": "^9.5.5",
+    "react": "^16.14.0",
+    "react-dom": "^16.14.0"
+  },
+  "devDependencies": {
+    "@emotion/babel-preset-css-prop": "^11.0.0",
+    "auto-changelog": "^2.2.1",
+    "eslint": "^7.17.0",
+    "eslint-plugin-react-hooks": "^4.2.0",
+    "prettier": "^2.2.1",
+    "react-hooks": "^1.0.1",
+    "react-performance": "0.0.5"
+  }
+}

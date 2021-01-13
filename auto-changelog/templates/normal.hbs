@@ -1,0 +1,26 @@
+{{#each releases}}
+  Release: **{{tag}}** [{{title}}]({{href}}) {{niceDate}}
+  {{#if merges}}
+    {{#each merges}}
+      {{!-- ## MERGE #{{id}} {{#if (isValidCommitMessage message)}} {{message}}{{/if}} [bitbucket link]({{href}}) --}}
+    {{/each}}
+  {{/if}}
+  {{#each fixes}}
+    - Each fix has a {{commit}} with a {{commit.subject}}, an {{id}} and a {{href}} to the fixed issue.
+  {{/each}}
+  {{#each commits}}
+    - **{{shorthash}}** [{{subject}}]({{href}})
+  {{/each}}
+{{/each}}
+{{#each releases}}
+  ### [{{title}}]({{href}})
+  {{!-- Each commit excludes the one previous from it. --}}
+  {{! List commits with `Breaking change: ` somewhere in the message }}
+  {{#commit-list commits heading='### Breaking Changes' message='Breaking change: '}}
+    - {{subject}} [`{{shorthash}}`]({{href}})
+  {{/commit-list}}
+  {{! List commits that add new features, but not those already listed above }}
+  {{#commit-list commits heading='### New Features' message='feat: ' exclude='Breaking change: '}}
+    - {{subject}} [`{{shorthash}}`]({{href}}) {{date}}
+  {{/commit-list}}
+{{/each}}

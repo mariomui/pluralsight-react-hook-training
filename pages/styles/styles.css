@@ -1,0 +1,38 @@
+html {
+  min-height: 100vh;
+  min-width: 100vw;
+ 
+} 
+@media screen and (min-width: 480px) {
+  :root {
+    font-size: 25px;
+  }
+}
+
+@media screen and (min-width: 375px) and (max-width: 900px) {
+  :root {
+    font-size: 25px;
+  }
+}
+@media screen and (min-width: 1005px) and (max-width: 1920px) {
+  :root {
+    font-size: 35px;
+  }
+}
+body {
+  height:100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+#__next {
+  height: 100% !important;
+  width: 100% !important;
+}
+
+div, main, section, article {
+  /* height:100%; */
+  font-size: inherit;
+  /* width: 100%; */
+}
