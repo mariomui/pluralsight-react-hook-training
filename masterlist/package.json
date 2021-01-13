@@ -6,14 +6,25 @@
   "explain": [
     "dev - Runs next dev which starts Next.js in development mode",
     "build - Runs next build which builds the application for production usage",
-    "prodstart - Runs next start which starts a Next.js production server"
+    "prodstart - Runs next start which starts a Next.js production server",
+    "https://nodejs.org/api/path.html will be used to describe config variables path includes filename and extension and location. basename, etc"
   ],
+  "acl": {
+    "test": "tested",
+    "changelogpath": "./CHANGELOG.md",
+    "template": "./acl-templates/normal.hbs"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "npm run dev",
     "dev": "next dev",
     "build": "next build",
-    "prodstart": "next start"
+    "prodstart": "next start",
+    "testscript": "echo $npm_package_config_test",
+    "preversion": "git pull",
+    "version": "npm run acl && git add -A",
+    "postversion": "git push && git push -u --follow-tags",
+    "acl": "auto-changelog -o $npm_package_acl_changelogpath --template $npm_package_acl_template"
   },
   "keywords": [],
   "author": "",
@@ -28,6 +39,7 @@
   },
   "devDependencies": {
     "@emotion/babel-preset-css-prop": "^11.0.0",
+    "auto-changelog": "^2.2.1",
     "eslint": "^7.17.0",
     "eslint-plugin-react-hooks": "^4.2.0",
     "prettier": "^2.2.1",
