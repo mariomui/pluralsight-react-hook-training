@@ -2,6 +2,7 @@ import React, {
   createRef,
   useCallback,
   useEffect,
+  useMemo,
   useRef,
   useState,
 } from 'react';
@@ -9,6 +10,7 @@ import styled from '@emotion/styled';
 import { ImgSource } from '@components/ImgSource';
 import { css } from '@emotion/react';
 import { useRefWithCallback } from 'core/helper/hooks';
+import { SmartSpeaker } from './SmartSpeaker';
 
 const speakerIds = [
   187,
@@ -32,13 +34,7 @@ const SPortraitGallery = styled.section`
   flex-wrap: wrap;
   margin: calc(var(--gap) * -1);
 `;
-const SSpeakerPortrait = styled.div`
-  flex-grow: 1;
-  /* min-width: 33%; */
-  /* display: flex; ; */
-  margin: var(--gap);
-  flex-basis: calc(200px - 100%) * 9999;
-`;
+
 export default function ScrollPic() {
   console.log('scroll pic component renders');
   const [windowTitle, setWindowTitle] = useState(0);
@@ -95,35 +91,11 @@ export default function ScrollPic() {
       {speakerIds.map((sid) => {
         const primaryImg = `static/speakers/Speaker-${sid}.jpg`;
         const secondaryImg = `static/speakers/bw/Speaker-${sid}.jpg`;
+        const portrait = { primaryImg, secondaryImg, sid };
         return (
-          <SSpeakerPortrait
-            css={css`
-              /* width: 33%;
-              flex-grow: 1;
-              flex-basis: 33%; */
-            `}
-            key={sid}
-            // onMouseOver={(e) => {
-            //   setMouseEventCount(mouseEventCount + 1);
-            //   console.log(sid, 'onmouse overed');
-            //   /*
-            //   handleMouseOver uses a state hook that sets the sid. The state doesn't change that often. so React knows to not rerender.
-            //   But multiple set states would then rerender the component and the useEffect will keep firing.
-            //   Experiment withou removing windowTitle.
-            //   */
-            //   handleMouseOver(sid);
-            // }}
-          >
-            <ImgSource
-              ref={primaryRef}
-              theNode={theNode}
-              theTrigger={theTrigger}
-              handleCallback={handleCallback}
-              primaryImg={primaryImg}
-              speakerId={sid}
-              secondaryImg={secondaryImg}
-            />
-          </SSpeakerPortrait>
+          <SmartSpeaker ref={primaryRef} portrait={portrait}>
+            <div>speaker data</div>
+          </SmartSpeaker>
         );
       })}
     </SPortraitGallery>
