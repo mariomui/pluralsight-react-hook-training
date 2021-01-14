@@ -21,9 +21,8 @@ export function GeneralLayout({ contentA, contentB, children }) {
     <SMain>
       <SContent>
         {contentA}
-        {contentB}
-
         {children}
+        {contentB}
       </SContent>
     </SMain>
   );

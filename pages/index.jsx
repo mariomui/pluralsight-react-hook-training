@@ -148,7 +148,6 @@ const BottomCmp = (textHistory) => {
             );
           })}
         </STextHistoryBox>
-        <NavBar></NavBar>
         <div>placeholder for saturday and sunday controls</div>
 
         <ScrollPic></ScrollPic>
@@ -199,7 +198,9 @@ const Index = () => {
     <GeneralLayout
       contentA={TopContent(reportToBoo, inputText)}
       contentB={BottomCmp(textHistory)}
-    ></GeneralLayout>
+    >
+      <NavBar></NavBar>
+    </GeneralLayout>
   );
 };
 
