@@ -40,12 +40,12 @@ const SSpeakerPortrait = styled.div`
   flex-basis: calc(200px - 100%) * 9999;
 `;
 export default function ScrollPic() {
+  console.log('scroll pic component renders');
   const [windowTitle, setWindowTitle] = useState(0);
 
   const [mouseEventCount, setMouseEventCount] = useState(0);
   const handleMouseOver = useCallback((sid) => {
     setWindowTitle(sid);
-    console.log('hi');
   }, []);
 
   const [theNode, setNode] = useState(null);
@@ -62,7 +62,7 @@ export default function ScrollPic() {
 
   useEffect(() => {
     setLoading(false);
-  }, [isLoading]);
+  }, []);
 
   useEffect(() => {
     window.document.title = windowTitle + '';
@@ -120,6 +120,7 @@ export default function ScrollPic() {
               theTrigger={theTrigger}
               handleCallback={handleCallback}
               primaryImg={primaryImg}
+              speakerId={sid}
               secondaryImg={secondaryImg}
             />
           </SSpeakerPortrait>

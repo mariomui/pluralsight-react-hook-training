@@ -24,16 +24,17 @@ const SImgSquare = styled.div`
   }
 `;
 export const ImgSource = forwardRef((props, ref) => {
-  const { theNode, theTrigger, primaryImg, secondaryImg } = props;
+  const { theNode, theTrigger, primaryImg, secondaryImg, speakerId } = props;
+  console.log('imgSource component renders with speakerId:', speakerId);
   const imgRef = useRef(null);
   const [isImgWithinView, setIsImgWithinView] = useState(false);
 
   // handles hiding our img before it is ready to load.
   const [isLoading, setIsLoading] = useState(true);
 
-  const setPrimaryImg = () => {
+  const setPrimaryImg = useCallback(() => {
     imgRef.current.src = primaryImg;
-  };
+  }, []);
   const setSecondaryImg = () => {
     imgRef.current.src = secondaryImg;
   };
@@ -47,7 +48,6 @@ export const ImgSource = forwardRef((props, ref) => {
     const isTopOfImgNorthOfWindow = top < rtop;
     const isBottomOfImgSouthOfWindow = bottom > rbottom;
     const condition = !isTopOfImgNorthOfWindow && !isBottomOfImgSouthOfWindow;
-    console.log(condition);
     return condition;
   }, []);
   const handleScroll = useCallback(
@@ -66,7 +66,7 @@ export const ImgSource = forwardRef((props, ref) => {
     // after render, show our image.
     // this allows time for the useEffect logic to either gray or color the image on load.
     setIsLoading(false);
-  }, [isLoading]);
+  }, []);
 
   useEffect(
     () => {
@@ -100,7 +100,7 @@ export const ImgSource = forwardRef((props, ref) => {
         }
         ref={imgRef}
         onMouseOver={setPrimaryImg}
-        onMouseOut={setSecondaryImg}
+        // onMouseOut={setSecondaryImg}
       />
     </SImgSquare>
   );
