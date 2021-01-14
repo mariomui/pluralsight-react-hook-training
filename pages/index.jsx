@@ -97,11 +97,14 @@ const SInputElementContainer = styled.div`
 `;
 const STextHistoryBox = styled.div`
   display: flex;
-  flex-flow: column;
+  flex-flow: row wrap;
   /* align-items: space-between; */
-  justify-content: flex-start; // columns uses this to vertically center;
+  justify-content: space-around; // columns uses this to vertically center;
   outline: 1px solid white;
   flex: 0 0 25%;
+  div + div {
+    margin-left: 1rem;
+  }
 `;
 
 const outside = () => {};

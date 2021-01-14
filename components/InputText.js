@@ -3,12 +3,12 @@ import { debounce } from '../core/helper';
 import { css, jsx } from '@emotion/react';
 
 export const InputElement = (props) => {
-  // const newProps = Object.entries(props).reduce((accum, [key, value]) => {
-  //   if (key !== 'handleOnInputChange') {
-  //     accum[key] = value;
-  //   }
-  //   return accum;
-  // }, {});
+  const newProps = Object.entries(props).reduce((accum, [key, value]) => {
+    if (key !== 'handleOnInputChange') {
+      accum[key] = value;
+    }
+    return accum;
+  }, {});
   const [inputText, setInputText] = useState('');
   const [textHistory, setTextHistory] = useState([]);
   const [saveCounter, setSaveCounter] = useState(0);
@@ -44,9 +44,8 @@ export const InputElement = (props) => {
         name="example"
         type="text"
         value={inputText}
-        // {...newProps}
-
         onChange={handleOnInputChange}
+        {...newProps}
       />
     </>
   );
