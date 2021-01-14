@@ -3,10 +3,10 @@ import styled from '@emotion/styled';
 import { debounce } from '../core/helper';
 import { GeneralLayout } from '../components/layouts/GeneralLayout';
 import { css, jsx } from '@emotion/react';
-import { InputElement } from '@components/InputText';
-import { RDate } from '@components/RDate';
-import { NavBar } from '@components/NavBar';
-import ScrollPic from '@components/ScrollPic';
+import { InputElement } from '@/components/InputText';
+import { RDate } from '@/components/RDate';
+import { NavBar } from '@/components/NavBar';
+import ScrollPic from '@/components/ScrollPic';
 
 /*
 A Smart Component is any component which manages its own state. 
@@ -179,6 +179,7 @@ const Index = () => {
         </STopBanner>
         <SListedText>
           <SBottomContainer>
+            <div>placeholder for saturday and sunday controls</div>
             <STextHistoryBox>
               {textHistory.map((text, i) => {
                 return (

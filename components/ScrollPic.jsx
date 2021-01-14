@@ -7,10 +7,11 @@ import React, {
   useState,
 } from 'react';
 import styled from '@emotion/styled';
-import { ImgSource } from '@components/ImgSource';
+import { ImgSource } from '@/components/ImgSource';
 import { css } from '@emotion/react';
 import { useRefWithCallback } from 'core/helper/hooks';
-import { SmartSpeaker } from './SmartSpeaker';
+import { SmartSpeaker } from '@/components/SmartSpeaker';
+import { SpeakerDatas } from '@/core/models/SpeakerDatas';
 
 const speakerIds = [
   187,
@@ -64,6 +65,9 @@ export default function ScrollPic() {
     window.document.title = windowTitle + '';
     console.log('use effect is being called in scrollPic as sid changes');
   }, [windowTitle]);
+  const filteredSpeakerDatas = SpeakerDatas.filter((speakerData) => {
+    return speakerData;
+  });
   return (
     <SPortraitGallery
       ref={primaryRef}
@@ -88,13 +92,14 @@ export default function ScrollPic() {
         {mouseEventCount}
       </span> */}
 
-      {speakerIds.map((sid) => {
+      {filteredSpeakerDatas.map((speakerData) => {
+        const { id: sid, firstName, lastName } = speakerData;
         const primaryImg = `static/speakers/Speaker-${sid}.jpg`;
         const secondaryImg = `static/speakers/bw/Speaker-${sid}.jpg`;
         const portrait = { primaryImg, secondaryImg, sid };
         return (
           <SmartSpeaker ref={primaryRef} portrait={portrait}>
-            <div>speaker data</div>
+            <div>{`${firstName}, ${lastName}`}</div>
           </SmartSpeaker>
         );
       })}
