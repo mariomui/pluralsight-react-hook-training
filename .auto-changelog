@@ -4,5 +4,6 @@
   "unreleased": true,
   "commitLimit": false,
   "package": true,
+  "sortCommits": "date",
   "startingVersion": "v1.0.5-0"
 }
