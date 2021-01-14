@@ -16,6 +16,11 @@ const SBar = styled.ul`
     margin: var(--gap);
   }
 `;
+export const NavLink = styled.li`
+  &:hover {
+    cursor: pointer;
+  }
+`;
 export const NavBar = () => {
   const { page, dispatch } = useContext(PageContext);
   const handleClick = (e) => {
@@ -28,15 +33,14 @@ export const NavBar = () => {
   }, [page]);
   return (
     <SBar>
-      <li>
-        <Link href="/">
-          <a>Home</a>
-        </Link>
-      </li>
-      <li data-page={'speakers'} onClick={handleClick}>
+      <NavLink data-page={'home'} onClick={handleClick}>
+        <span>Home</span>
+      </NavLink>
+
+      <NavLink data-page={'speakers'} onClick={handleClick}>
         <span>Speakers</span>
         {/* {page.page} */}
-      </li>
+      </NavLink>
     </SBar>
   );
 };

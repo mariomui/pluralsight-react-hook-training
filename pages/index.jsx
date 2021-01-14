@@ -1,4 +1,10 @@
-import React, { useCallback, useEffect, useMemo, useState } from 'react';
+import React, {
+  useCallback,
+  useContext,
+  useEffect,
+  useMemo,
+  useState,
+} from 'react';
 import styled from '@emotion/styled';
 import { debounce } from '../core/helper';
 import { GeneralLayout } from '../components/layouts/GeneralLayout';
@@ -7,6 +13,7 @@ import { InputElement } from '@/components/InputText';
 import { RDate } from '@/components/RDate';
 import { NavBar } from '@/components/NavBar';
 import ScrollPic from '@/components/ScrollPic';
+import { PageContext } from './_app';
 
 /*
 A Smart Component is any component which manages its own state. 
@@ -52,6 +59,7 @@ const STopBanner = styled.article`
   font-size: 1rem;
   align-items: center;
   padding: 2em 0em;
+  max-height: 2em;
 `;
 
 const SListedText = styled.article`
@@ -156,6 +164,13 @@ const BottomCmp = (textHistory) => {
     </SListedText>
   );
 };
+
+function pageToShow(pageName, cmprop) {
+  if (pageName === 'speakers') {
+    return BottomCmp(...cmprop);
+  }
+  return null;
+}
 const Index = () => {
   // i have to debounce the handler.
   console.log('how many times does Index component rerender');
@@ -193,14 +208,16 @@ const Index = () => {
   const reportToBoo = useCallback((data) => {
     setTextHistory(data);
   }, []);
+  const { page } = useContext(PageContext);
 
   return (
-    <GeneralLayout
-      contentA={TopContent(reportToBoo, inputText)}
-      contentB={BottomCmp(textHistory)}
-    >
+    <>
       <NavBar></NavBar>
-    </GeneralLayout>
+      <GeneralLayout
+        contentA={TopContent(reportToBoo, inputText)}
+        contentB={page?.page && pageToShow(page.page, [textHistory])}
+      ></GeneralLayout>
+    </>
   );
 };
 
