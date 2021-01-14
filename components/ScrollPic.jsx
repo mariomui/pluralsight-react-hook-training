@@ -66,7 +66,7 @@ export default function ScrollPic() {
 
   useEffect(() => {
     window.document.title = windowTitle + '';
-    console.log('use effect is being called');
+    console.log('use effect is being called in scrollPic as sid changes');
   }, [windowTitle]);
   return (
     <SPortraitGallery
@@ -103,16 +103,16 @@ export default function ScrollPic() {
               flex-basis: 33%; */
             `}
             key={sid}
-            onMouseOver={(e) => {
-              setMouseEventCount(mouseEventCount + 1);
-              console.log(sid, 'onmouse overed');
-              /*
-              handleMouseOver uses a state hook that sets the sid. The state doesn't change that often. so React knows to not rerender.
-              But multiple set states would then rerender the component and the useEffect will keep firing. 
-              Experiment withou removing windowTitle.
-              */
-              handleMouseOver(sid);
-            }}
+            // onMouseOver={(e) => {
+            //   setMouseEventCount(mouseEventCount + 1);
+            //   console.log(sid, 'onmouse overed');
+            //   /*
+            //   handleMouseOver uses a state hook that sets the sid. The state doesn't change that often. so React knows to not rerender.
+            //   But multiple set states would then rerender the component and the useEffect will keep firing.
+            //   Experiment withou removing windowTitle.
+            //   */
+            //   handleMouseOver(sid);
+            // }}
           >
             <ImgSource
               ref={primaryRef}

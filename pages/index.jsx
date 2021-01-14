@@ -104,11 +104,12 @@ const STextHistoryBox = styled.div`
   flex: 0 0 25%;
 `;
 
+const outside = () => {};
 const Index = () => {
   // i have to debounce the handler.
+  console.log('how many times does Index component rerender');
   const [inputText, setInputText] = useState('');
   const [textHistory, setTextHistory] = useState([]);
-  const [saveCounter, setSaveCounter] = useState(0);
   /*
   everytime a prop renders the function gets activated.
   The callback is a simple ignore flag.
@@ -128,27 +129,6 @@ const Index = () => {
   const random = Number(Math.random().toFixed(2).split('.')[1]);
   const [isLoading, setIsLoading] = useState(true);
 
-  const debouncedSearch = debounce((value) => {
-    console.log(value, 'saving');
-    setSaveCounter(saveCounter + 1);
-    setTextHistory([...textHistory, value]);
-    setInputText('');
-  }, 1000);
-
-  const handleOnInputChange = useCallback(
-    (e) => {
-      setInputText(e.target.value);
-
-      // if the debounce search changes the inputText and resets all the state.
-      // try putting in debounced search again, the render of that state will clear stuff out.
-      // it might be better to do a useEffect so that the component renders, and then we change
-      // stuff.
-      // setTextHistory([...textHistory, e.target.value]);
-      debouncedSearch(e.target.value);
-    },
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [textHistory.length]
-  );
   // on first load, texthistorylen is 0. all functions are rendered.
   // handleinputchange function is created. The keys keep hammering away but the function
   // still uses the same setinputtext and the same debouncedSearch. So debounce works.
@@ -158,7 +138,9 @@ const Index = () => {
   // useEffect(() => {
   //   debouncedSearch(inputText);
   // }, [inputText]);
-
+  const reportToBoo = useCallback((data) => {
+    setTextHistory(data);
+  }, []);
   return (
     <GeneralLayout>
       <SContent>
@@ -171,14 +153,15 @@ const Index = () => {
               <STitle>Mario's Hooks School</STitle>
               <SInputElementContainer>
                 <InputElement
+                  reportToBoo={reportToBoo}
                   css={css`
                     font-size: 1rem;
                   `}
-                  placeholder="Enter some text"
-                  handleOnInputChange={handleOnInputChange}
-                  name="example"
-                  type="text"
-                  value={inputText}
+                  // placeholder="Enter some text"
+                  // handleOnInputChange={handleOnInputChange}
+                  // name="example"
+                  // type="text"
+                  // value={inputText}
                 />
               </SInputElementContainer>
               <span
@@ -193,7 +176,7 @@ const Index = () => {
         </STopBanner>
         <SListedText>
           <SBottomContainer>
-            {/* <STextHistoryBox>
+            <STextHistoryBox>
               {textHistory.map((text, i) => {
                 return (
                   <div
@@ -206,7 +189,7 @@ const Index = () => {
                   </div>
                 );
               })}
-            </STextHistoryBox> */}
+            </STextHistoryBox>
             <NavBar></NavBar>
             <ScrollPic></ScrollPic>
             {/* speaker */}
