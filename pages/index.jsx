@@ -59,7 +59,8 @@ const STopBanner = styled.article`
   font-size: 1rem;
   align-items: center;
   padding: 2em 0em;
-  max-height: 2em;
+  max-height: 5em;
+  min-height: 5em;
 `;
 
 const SListedText = styled.article`
