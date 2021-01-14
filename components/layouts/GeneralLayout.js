@@ -16,11 +16,13 @@ const SContent = styled.section`
     flex-basis: calc((2200px - 50%) * 999);
   }
 `;
-export function GeneralLayout({ contentA, children }) {
+export function GeneralLayout({ contentA, contentB, children }) {
   return (
     <SMain>
       <SContent>
         {contentA}
+        {contentB}
+
         {children}
       </SContent>
     </SMain>

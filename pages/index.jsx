@@ -129,6 +129,34 @@ const TopContent = (reportToBoo, inputText) => {
     </STopBanner>
   );
 };
+
+const BottomCmp = (textHistory) => {
+  return (
+    <SListedText>
+      <SBottomContainer>
+        <STextHistoryBox>
+          {textHistory.map((text, i) => {
+            return (
+              <div
+                css={css`
+                  height: unset;
+                `}
+                key={i}
+              >
+                {text}
+              </div>
+            );
+          })}
+        </STextHistoryBox>
+        <NavBar></NavBar>
+        <div>placeholder for saturday and sunday controls</div>
+
+        <ScrollPic></ScrollPic>
+        {/* speaker */}
+      </SBottomContainer>
+    </SListedText>
+  );
+};
 const Index = () => {
   // i have to debounce the handler.
   console.log('how many times does Index component rerender');
@@ -168,31 +196,10 @@ const Index = () => {
   }, []);
 
   return (
-    <GeneralLayout contentA={TopContent(reportToBoo, inputText)}>
-      <SListedText>
-        <SBottomContainer>
-          <STextHistoryBox>
-            {textHistory.map((text, i) => {
-              return (
-                <div
-                  css={css`
-                    height: unset;
-                  `}
-                  key={i}
-                >
-                  {text}
-                </div>
-              );
-            })}
-          </STextHistoryBox>
-          <NavBar></NavBar>
-          <div>placeholder for saturday and sunday controls</div>
-
-          <ScrollPic></ScrollPic>
-          {/* speaker */}
-        </SBottomContainer>
-      </SListedText>
-    </GeneralLayout>
+    <GeneralLayout
+      contentA={TopContent(reportToBoo, inputText)}
+      contentB={BottomCmp(textHistory)}
+    ></GeneralLayout>
   );
 };
 
