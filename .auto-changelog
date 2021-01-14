@@ -1,8 +1,8 @@
 {
   "output": "CHANGELOG.md",
   "template": "auto-changelog/templates/normal.hbs",
-  "unreleased": false,
+  "unreleased": true,
   "commitLimit": false,
   "package": true,
-  "startingVersion": "v1.0.0"
+  "startingVersion": "v1.0.5-0"
 }
