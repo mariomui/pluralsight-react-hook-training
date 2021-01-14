@@ -45,17 +45,6 @@ const SBottomContainer = styled(SContainer)`
   flex-grow: 1;
 `;
 
-const SContent = styled.section`
-  position: relative;
-  display: flex;
-  height: 100%;
-  width: 100%;
-  flex-wrap: wrap;
-  > article {
-    flex-grow: 1;
-    flex-basis: calc((2200px - 50%) * 999);
-  }
-`;
 const STopBanner = styled.article`
   background: greenyellow;
   width: 100%;
@@ -106,8 +95,40 @@ const STextHistoryBox = styled.div`
     margin-left: 1rem;
   }
 `;
-
-const outside = () => {};
+const TopContent = (reportToBoo, inputText) => {
+  return (
+    <STopBanner>
+      <STopContainer>
+        <SLeftDAteTimeCol>
+          <RDate />
+        </SLeftDAteTimeCol>
+        <SInputCol>
+          <STitle>Mario's Hooks School</STitle>
+          <SInputElementContainer>
+            <InputElement
+              reportToBoo={reportToBoo}
+              css={css`
+                font-size: 1rem;
+              `}
+              // placeholder="Enter some text"
+              // handleOnInputChange={handleOnInputChange}
+              // name="example"
+              // type="text"
+              // value={inputText}
+            />
+          </SInputElementContainer>
+          <span
+            css={css`
+              min-height: 10%;
+            `}
+          >
+            {inputText}
+          </span>
+        </SInputCol>
+      </STopContainer>
+    </STopBanner>
+  );
+};
 const Index = () => {
   // i have to debounce the handler.
   console.log('how many times does Index component rerender');
@@ -141,65 +162,36 @@ const Index = () => {
   // useEffect(() => {
   //   debouncedSearch(inputText);
   // }, [inputText]);
+
   const reportToBoo = useCallback((data) => {
     setTextHistory(data);
   }, []);
+
   return (
-    <GeneralLayout>
-      <SContent>
-        <STopBanner>
-          <STopContainer>
-            <SLeftDAteTimeCol>
-              <RDate />
-            </SLeftDAteTimeCol>
-            <SInputCol>
-              <STitle>Mario's Hooks School</STitle>
-              <SInputElementContainer>
-                <InputElement
-                  reportToBoo={reportToBoo}
+    <GeneralLayout contentA={TopContent(reportToBoo, inputText)}>
+      <SListedText>
+        <SBottomContainer>
+          <STextHistoryBox>
+            {textHistory.map((text, i) => {
+              return (
+                <div
                   css={css`
-                    font-size: 1rem;
+                    height: unset;
                   `}
-                  // placeholder="Enter some text"
-                  // handleOnInputChange={handleOnInputChange}
-                  // name="example"
-                  // type="text"
-                  // value={inputText}
-                />
-              </SInputElementContainer>
-              <span
-                css={css`
-                  min-height: 10%;
-                `}
-              >
-                {inputText}
-              </span>
-            </SInputCol>
-          </STopContainer>
-        </STopBanner>
-        <SListedText>
-          <SBottomContainer>
-            <div>placeholder for saturday and sunday controls</div>
-            <STextHistoryBox>
-              {textHistory.map((text, i) => {
-                return (
-                  <div
-                    css={css`
-                      height: unset;
-                    `}
-                    key={i}
-                  >
-                    {text}
-                  </div>
-                );
-              })}
-            </STextHistoryBox>
-            <NavBar></NavBar>
-            <ScrollPic></ScrollPic>
-            {/* speaker */}
-          </SBottomContainer>
-        </SListedText>
-      </SContent>
+                  key={i}
+                >
+                  {text}
+                </div>
+              );
+            })}
+          </STextHistoryBox>
+          <NavBar></NavBar>
+          <div>placeholder for saturday and sunday controls</div>
+
+          <ScrollPic></ScrollPic>
+          {/* speaker */}
+        </SBottomContainer>
+      </SListedText>
     </GeneralLayout>
   );
 };

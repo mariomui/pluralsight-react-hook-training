@@ -5,6 +5,24 @@ const SMain = styled.main`
   width: 100%;
 `;
 
-export function GeneralLayout({ children }) {
-  return <SMain>{children}</SMain>;
+const SContent = styled.section`
+  position: relative;
+  display: flex;
+  height: 100%;
+  width: 100%;
+  flex-wrap: wrap;
+  > article {
+    flex-grow: 1;
+    flex-basis: calc((2200px - 50%) * 999);
+  }
+`;
+export function GeneralLayout({ contentA, children }) {
+  return (
+    <SMain>
+      <SContent>
+        {contentA}
+        {children}
+      </SContent>
+    </SMain>
+  );
 }
