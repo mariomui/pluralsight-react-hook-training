@@ -1,4 +1,5 @@
-### Release: **** [v1.1.2](https://github.com/mariomui/pluralsight-react-hook-training/compare/v1.1.2...v1.1.2) 14 January 2021
+### Release: **** [v1.1.3-0](https://github.com/mariomui/pluralsight-react-hook-training/compare/v1.1.2...v1.1.3-0) 14 January 2021
+**8d90284** [update version script to look a bit nicer](https://github.com/mariomui/pluralsight-react-hook-training/commit/8d90284a93065b4098326a4d7959e5d905f82193)
 ### Release: **v1.1.2** [v1.1.2](https://github.com/mariomui/pluralsight-react-hook-training/compare/v1.1.1...v1.1.2) 14 January 2021
 **4db8274** [update version script to look a bit nicer](https://github.com/mariomui/pluralsight-react-hook-training/commit/4db8274569b59931c9c0d7c3615a72564f15fa3a)
 ### Release: **v1.1.1** [v1.1.1](https://github.com/mariomui/pluralsight-react-hook-training/compare/v1.1.0...v1.1.1) 14 January 2021
